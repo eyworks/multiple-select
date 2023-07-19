@@ -4448,7 +4448,9 @@ var MultipleSelect = /*#__PURE__*/function () {
         for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
           var row = _step6.value;
           if (row.type === 'optgroup') {
-            this._checkGroup(row, checked, true);
+            if (row.visible) {
+              this._checkGroup(row, checked, true);
+            }
           } else if (!row.disabled && !row.divider && (ignoreUpdate || row.visible)) {
             row.selected = checked;
           }
@@ -4469,7 +4471,7 @@ var MultipleSelect = /*#__PURE__*/function () {
     value: function _checkGroup(group, checked, ignoreUpdate) {
       group.selected = checked;
       group.children.forEach(function (row) {
-        if (!row.disabled && !row.divider && (ignoreUpdate || row.visible)) {
+        if (!row.disabled && !row.divider && row.visible) {
           row.selected = checked;
         }
       });
